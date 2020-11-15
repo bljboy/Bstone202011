@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bstone/login_route/Box.dart';
+import 'file:///D:/003_MyWorksPace/03_MyFlutterWorksPace/bstone/lib/box.dart';
 
 Widget radioButton() {
   return Container(

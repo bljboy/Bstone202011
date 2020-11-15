@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:bstone/login_route/box_bottom.dart';
 
 class Box extends StatefulWidget {
   @override
@@ -16,7 +16,11 @@ class _BoxState extends State<Box> {
         ScreenUtil(width: 1080, height: 1920, allowFontScaling: true);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
+      theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+          highlightColor: Color.fromRGBO(255, 255, 255, 0.5),
+          splashColor: Colors.white70),
+      home: BottomNav(),
     );
   }
 }

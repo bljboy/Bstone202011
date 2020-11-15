@@ -1,5 +1,5 @@
 import 'package:bstone/login/LoginScrollView.dart';
-import 'package:bstone/login_route/Box.dart';
+import 'file:///D:/003_MyWorksPace/03_MyFlutterWorksPace/bstone/lib/box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bstone/login/LoginBackground.dart';
@@ -19,6 +19,9 @@ class _LoginState extends State<Login> {
       // routes: {
       //   '/Box': (context) => Box(),
       // },
+      theme: ThemeData(
+        primarySwatch: Colors.yellow,
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
