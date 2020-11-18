@@ -1,6 +1,7 @@
+import 'package:bstone/box.dart';
+import 'package:bstone/login_route/pageviews/community.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'file:///D:/003_MyWorksPace/03_MyFlutterWorksPace/bstone/lib/box.dart';
 
 Widget radioButton() {
   return Container(
@@ -55,14 +56,16 @@ class LoginFunZone extends StatelessWidget {
                 ]),
             child: Material(
               color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        settings: RouteSettings(name: "/Box"),
-                        builder: (BuildContext context) => Box(),
-                      ));
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(context,
+                      new MaterialPageRoute(builder: (BuildContext context) {
+                    return Box();
+                  }), (route) => route == null);
+                  // Navigator.of(context)
+                  //     .push(MaterialPageRoute(builder: (context) {
+                  //   return Box();
+                  // }));
                 },
                 child: Center(
                   child: Text(

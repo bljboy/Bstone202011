@@ -1,8 +1,11 @@
 import 'package:bstone/login/LoginScrollView.dart';
-import 'file:///D:/003_MyWorksPace/03_MyFlutterWorksPace/bstone/lib/box.dart';
+import 'package:bstone/login_route/pageviews/community.dart';
+import 'package:bstone/login_route/tabviews/loveview.dart';
+import 'package:bstone/login_route/tabviews/routeloveview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bstone/login/LoginBackground.dart';
+import 'package:bstone/box.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -16,12 +19,6 @@ class _LoginState extends State<Login> {
     ScreenUtil.instance =
         ScreenUtil(width: 1080, height: 1920, allowFontScaling: true);
     return MaterialApp(
-      // routes: {
-      //   '/Box': (context) => Box(),
-      // },
-      theme: ThemeData(
-        primarySwatch: Colors.yellow,
-      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,

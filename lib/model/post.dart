@@ -8,23 +8,27 @@ class Post {
 
 final List<Post> posts = [
   Post(
-      title: "我的珍珍",
-      author: "保",
-      imageUrl:
-          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605467442211&di=da76d77605d8d293336bf53bd6335724&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F52%2F62%2F31300542679117141195629117826.jpg"),
+      title: "有两种不联系：一种是忘记了，一种是放在回忆里。",
+      author: "保聆静",
+      imageUrl: "https://scpic.chinaz.net/files/pic/pic9/202011/hpic3156.jpg"),
+  Post(
+      title: "你不愿意种花，你说，我不愿看见它一点点凋落。是的，为了避免结束，你避免了一切开始。",
+      author: "王力宏",
+      imageUrl: "https://seopic.699pic.com/photo/50131/2125.jpg_wh1200.jpg"),
+  Post(
+      title: "有时关不上冰箱的门，脚趾撞到了桌腿，临出门找不到想要的东西，突然忍不住掉眼泪。你觉得小题大作，只有我自己知道为什么",
+      author: "周杰伦",
+      imageUrl: "https://img.ivsky.com/img/tupian/t/202004/20/luori-018.jpg"),
+  Post(
+      title: "一条路不能回头，就是一生要走许多路，有成长之路，很多事情不能自己掌控，即使再孤单再寂寞，仍要继续走下去，不许停也不能回头。",
+      author: "林俊杰",
+      imageUrl: "https://img.ivsky.com/img/tupian/t/202004/20/luori-022.jpg"),
   Post(
       title: "我的珍珍",
-      author: "保",
-      imageUrl:
-          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605467442211&di=da76d77605d8d293336bf53bd6335724&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F52%2F62%2F31300542679117141195629117826.jpg"),
+      author: "陶喆",
+      imageUrl: "https://img.ivsky.com/img/tupian/t/202004/20/luori-022.jpg"),
   Post(
       title: "我的珍珍",
-      author: "保",
-      imageUrl:
-          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605467442211&di=da76d77605d8d293336bf53bd6335724&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F52%2F62%2F31300542679117141195629117826.jpg"),
-  Post(
-      title: "我的珍珍",
-      author: "保",
-      imageUrl:
-          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605467442211&di=da76d77605d8d293336bf53bd6335724&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F52%2F62%2F31300542679117141195629117826.jpg")
+      author: "Music Man",
+      imageUrl: "https://img.ivsky.com/img/tupian/t/202004/01/xueshan-001.jpg"),
 ];

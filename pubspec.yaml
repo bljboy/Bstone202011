@@ -29,6 +29,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   oktoast: ^2.1.7
+  flutter_swiper: ^1.1.6
+  smart_flare: any
+  photo_view: ^0.10.3
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +59,7 @@ flutter:
     - lib/images/icons/sweet_action.png
     - lib/images/icons/me.png
     - lib/images/icons/me_action.png
-
+    - lib/assets/button-animation.flr
     - lib/images/image_01.png
     - lib/images/image_02.png
     - lib/images/logo.png
@@ -93,6 +96,10 @@ flutter:
     - family: pfont
       fonts:
         - asset: lib/assets/pfont.ttf
+
+    - family: pfont2
+      fonts:
+        - asset: lib/assets/pfont2.ttf
 
 
 
