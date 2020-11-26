@@ -1,27 +1,30 @@
-import 'package:bstone/tools/PotoView.dart';
 import 'package:flutter/material.dart';
 
-class LoveViewRoute extends StatelessWidget {
-  final String title;
-  final String image;
+class LoveViewRoute extends StatefulWidget {
+  @override
+  _LoveViewRouteState createState() => _LoveViewRouteState();
+}
 
-  const LoveViewRoute({Key key, this.title, this.image}) : super(key: key);
+class _LoveViewRouteState extends State<LoveViewRoute> {
+  final _bottomSheetScaffoldKey = GlobalKey<ScaffoldState>();
+
+  _openBottomSheet() {
+    _bottomSheetScaffoldKey.currentState.showBottomSheet((context) {
+      return BottomAppBar(
+        child: Container(
+          height: 250,
+          width: double.infinity,
+          padding: EdgeInsets.all(16.0),
+          child: Text("data"),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: FlatButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return PotoView(
-                  imageProvider: NetworkImage(image),
-                  heroTag: "simple",
-                );
-              }));
-            },
-            child: Image.network(image)));
+      key: _bottomSheetScaffoldKey,
+    );
   }
 }

@@ -62,10 +62,6 @@ class LoginFunZone extends StatelessWidget {
                       new MaterialPageRoute(builder: (BuildContext context) {
                     return Box();
                   }), (route) => route == null);
-                  // Navigator.of(context)
-                  //     .push(MaterialPageRoute(builder: (context) {
-                  //   return Box();
-                  // }));
                 },
                 child: Center(
                   child: Text(

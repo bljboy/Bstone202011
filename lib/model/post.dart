@@ -12,7 +12,8 @@ final List<Post> posts = [
       author: "保聆静",
       imageUrl: "https://scpic.chinaz.net/files/pic/pic9/202011/hpic3156.jpg"),
   Post(
-      title: "你不愿意种花，你说，我不愿看见它一点点凋落。是的，为了避免结束，你避免了一切开始。",
+      title:
+          "看着天bai 一边开车一边打哈欠,DJ报时说清晨六点想到见你就不累\n喔这些年我还留着你的高跟鞋,也会嫉妒今天谁的吻,又落在你的唇边,Oh亲爱的 你家的路怎会越开越远Oh天知道 怎么办我们都失去了方向感Oh亲爱的 你是否也在等着那一天心的距离能缩短找回遗失的安全感",
       author: "王力宏",
       imageUrl: "https://seopic.699pic.com/photo/50131/2125.jpg_wh1200.jpg"),
   Post(

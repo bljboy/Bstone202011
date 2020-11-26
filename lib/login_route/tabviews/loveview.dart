@@ -3,7 +3,13 @@ import 'package:bstone/model/post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:bstone/tools/PotoView.dart';
+
+List<Map> imglist = [
+  {"url": "http://pic1.win4000.com/pic/c/a7/9067fb0dd3.jpg"},
+  {"url": "http://pic1.win4000.com/pic/c/a7/731039b23b.jpg"},
+  {"url": "http://pic1.win4000.com/pic/c/a7/8a6829762a.jpg"},
+  {"url": "http://pic1.win4000.com/pic/c/a7/8a6829762a.jpg"},
+];
 
 class LoveViwe extends StatefulWidget {
   @override
@@ -11,104 +17,274 @@ class LoveViwe extends StatefulWidget {
 }
 
 class _LoveViweState extends State<LoveViwe> {
-  void _RouteLook(int index) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) {
-      return LoveViewRoute(
-        title: posts[index].author,
-        image: posts[index].imageUrl,
-      );
-    }));
-  }
+  final _bottomSheetScaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<Map> imglist = [
-    {"url": "http://pic1.win4000.com/pic/c/a7/9067fb0dd3.jpg"},
-    {"url": "http://pic1.win4000.com/pic/c/a7/731039b23b.jpg"},
-    {"url": "http://pic1.win4000.com/pic/c/a7/8a6829762a.jpg"},
-    {"url": "http://pic1.win4000.com/pic/c/a7/8a6829762a.jpg"},
-  ];
+  _openBottomSheet(int index) {
+    _bottomSheetScaffoldKey.currentState.showBottomSheet((context) {
+      return BottomAppBar(
+        child: Container(
+          margin: EdgeInsets.all(8.0),
+          height: 470,
+          width: double.infinity,
+          padding: EdgeInsets.all(16.0),
+          child: ListView.builder(
+            itemCount: posts.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Divider(),
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 14,
+                              backgroundColor: Color(0xFFCCCCCC),
+                              backgroundImage:
+                                  NetworkImage(posts[index].imageUrl),
+                            ),
+                            Padding(padding: EdgeInsets.only(left: 8)),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  posts[index].author,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF333333),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "12:59",
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF999999),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 30.0, top: 6.0),
+                    child: Text(
+                      '${posts[index].title}',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF333333),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      );
+    });
+  }
 
   Widget _listItemBuilder(BuildContext context, int index) {
     return Card(
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () {
-          _RouteLook(index);
-        },
-        child: Column(
-          children: [
-            ListTile(
-              leading: Container(
-                width: 40,
-                height: 40,
-                padding: EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Stack(
+            fit: StackFit.passthrough,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
                 ),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return PotoView(
-                        imageProvider: NetworkImage(
-                            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2828669594,1440386958&fm=26&gp=0.jpg"),
-                        heroTag: "simple",
-                      );
-                    }));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: NetworkImage(posts[index].imageUrl),
-                        fit: BoxFit.cover,
-                      ),
+                child: Image.network(
+                  posts[index].imageUrl,
+                  height: 200,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              Positioned(
+                left: 0,
+                top: 100,
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromARGB(0, 0, 0, 0),
+                        Color.fromARGB(80, 0, 0, 0),
+                      ],
                     ),
                   ),
                 ),
               ),
-              title: Text(posts[index].author),
-              subtitle: Text(
-                '13:00',
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                posts[index].title,
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
-              ),
-            ),
-            ButtonBar(
-              alignment: MainAxisAlignment.start,
-              children: [
-                FlatButton(
-                  textColor: const Color(0xFF6200EE),
-                  onPressed: () {
-                    // Perform some action
-                  },
-                  child: const Text('ACTION 1'),
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Color(0xFFCCCCCC),
+                      backgroundImage: NetworkImage(posts[index].imageUrl),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 8)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          posts[index].author,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF333333),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(top: 2)),
+                        Text(
+                          " demo",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF999999),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                FlatButton(
-                  textColor: const Color(0xFF6200EE),
-                  onPressed: () {
-                    // Perform some action
-                  },
-                  child: const Text('ACTION 2'),
+                Text(
+                  "12:59",
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF999999),
+                  ),
                 ),
               ],
             ),
-            Image.network(posts[index].imageUrl),
-            SizedBox(
-              height: 5,
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(bottom: 14),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFC600),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(8),
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    "#标签",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Text(
+                  '${posts[index].title}',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF333333),
+                  ),
+                ),
+              ],
             ),
-            // Image.network(
-            //   'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605693544453&di=a173a0c4c2b2c2bc9318e105a158bfd5&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201510%2F29%2F20151029140653_SzYFZ.jpeg',
-            //   fit: BoxFit.cover,
-            // ),
-          ],
-        ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    _openBottomSheet(index);
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.message,
+                        size: 16,
+                        color: Color(0xFF999999),
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 6)),
+                      Text(
+                        "3",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color(0xFF999999),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.favorite,
+                      size: 16,
+                      color: Color(0xFFFFC600),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 6)),
+                    Text(
+                      "2",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xFF999999),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.share,
+                      size: 16,
+                      color: Color(0xFF999999),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 6)),
+                    Text(
+                      "1",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xFF999999),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -116,6 +292,7 @@ class _LoveViweState extends State<LoveViwe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _bottomSheetScaffoldKey,
       backgroundColor: Color(0XFFFAFAFA),
       body: Container(
         child: ListView.builder(
@@ -125,9 +302,37 @@ class _LoveViweState extends State<LoveViwe> {
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: "发布话题",
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return LoveViewRoute();
+          }));
+        },
         child: Icon(Icons.add),
-        onPressed: () {},
       ),
+    );
+  }
+}
+
+class GridBuilder extends StatelessWidget {
+  Widget _gridItemBuilder(BuildContext context, int index) {
+    return Container(
+      child: Image.network(
+        posts[index].imageUrl,
+        fit: BoxFit.cover,
+        width: 15,
+        height: 15,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: posts.length,
+      itemBuilder: _gridItemBuilder,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, crossAxisSpacing: 8.0, mainAxisSpacing: 8.0),
     );
   }
 }

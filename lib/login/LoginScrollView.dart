@@ -1,3 +1,4 @@
+import 'package:bstone/register/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bstone/login/LoginLogo.dart';
@@ -6,10 +7,60 @@ import 'package:bstone/login/LoginFunZone.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bstone/Widgets/SocialIcon.dart';
 import 'package:bstone/Widgets/CustomIcons.dart';
+import 'package:apifm/apifm.dart' as Apifm;
+import 'package:flutter_qq/flutter_qq.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginScrollView extends StatelessWidget {
+class LoginScrollView extends StatefulWidget {
+  @override
+  _LoginScrollViewState createState() => _LoginScrollViewState();
+}
+
+class _LoginScrollViewState extends State<LoginScrollView> {
   @override
   Widget build(BuildContext context) {
+    loginQQ() async {
+      const appid = '101915485';
+      await FlutterQq.registerQQ(appid);
+      var qqResult = await FlutterQq.login();
+      if (qqResult.code == 0) {
+        // 登录成功
+        Fluttertoast.showToast(
+            msg: '授权成功', gravity: ToastGravity.CENTER, fontSize: 14);
+        var res = await Apifm.loginQQConnect(appid, qqResult.response['openid'],
+            qqResult.response['accessToken']);
+        if (res['code'] == 10000) {
+          // 用户不存在，则先注册
+          await Apifm.registerQQConnect({
+            'oauthConsumerKey': appid,
+            'openid': qqResult.response['openid'],
+            'accessToken': qqResult.response['accessToken'],
+          });
+          // 注册完后重新登录
+          res = await Apifm.loginQQConnect(appid, qqResult.response['openid'],
+              qqResult.response['accessToken']);
+        }
+        if (res['code'] != 0) {
+          // 登录失败
+          Fluttertoast.showToast(
+              msg: res['msg'], gravity: ToastGravity.CENTER, fontSize: 14);
+          return;
+        }
+      } else if (qqResult.code == 1) {
+        // 授权失败
+        Fluttertoast.showToast(
+            msg: qqResult.message, gravity: ToastGravity.CENTER, fontSize: 14);
+      } else {
+        // 用户取消授权
+        Fluttertoast.showToast(
+            msg: '已取消', gravity: ToastGravity.CENTER, fontSize: 14);
+      }
+    }
+
+    setState(() {
+      FlutterQq.registerQQ("101915485");
+    });
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
@@ -52,6 +103,7 @@ class LoginScrollView extends StatelessWidget {
                   ],
                   iconData: CustomIcons.qq,
                   onPressed: () {
+                    FlutterQq.login();
                     print("object");
                   },
                 ),
@@ -87,7 +139,12 @@ class LoginScrollView extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return Register();
+                    }));
+                  },
                   child: Text(
                     "注册",
                     style: TextStyle(

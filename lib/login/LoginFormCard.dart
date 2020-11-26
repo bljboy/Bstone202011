@@ -22,7 +22,7 @@ class LoginFormCard extends StatelessWidget {
                   color: Colors.black12,
                   offset: Offset(0.0, -10.0),
                   spreadRadius: 1,
-                  blurRadius: 10.0)
+                  blurRadius: 10.0),
             ]),
         child: Padding(
             padding: const EdgeInsets.all(16.0),
